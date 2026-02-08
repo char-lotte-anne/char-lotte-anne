@@ -14,7 +14,7 @@
   <meta name="twitter:description" content="New grad March 2026. Image processing, AI ethics, human-centered design." />
   <meta name="twitter:image" content="https://char-lotte-anne.vercel.app/images/student-ambassador-portrait.jpg" />
   <title>Charlotte Larson Freeman — Software Engineer</title>
-  <!-- Favicons: use /icon.ico and /icon.png so Vercel does not override with default V (reserved /favicon.ico). Local: use npm run dev — Safari ignores favicon for file:// -->
+  <!-- Favicons: generated from favicon.svg by npm run favicon (Vercel runs this on deploy). Use /icon.ico and /icon.png so Vercel does not override with default V. Local: npm run dev — Safari ignores favicon for file:// -->
   <link rel="icon" type="image/x-icon" href="/icon.ico?v=4" />
   <link rel="icon" type="image/png" sizes="32x32" href="/icon.png?v=4" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=4" />
@@ -345,8 +345,11 @@
       <div id="copy-announce" aria-live="polite" aria-atomic="true" class="sr-only"></div>
       <ul class="contact-links reveal">
         <li class="contact-email-wrap">
-          <a href="mailto:charlottelf@protonmail.com">charlottelf@protonmail.com</a>
-          <button type="button" class="contact-email-copy" aria-label="Copy email address" id="contact-email-copy">Copy</button>
+          <button type="button" class="contact-email-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="contact-email-menu" id="contact-email-trigger">charlottelf@protonmail.com</button>
+          <ul class="contact-email-menu" id="contact-email-menu" role="menu" aria-labelledby="contact-email-trigger">
+            <li role="none"><button type="button" role="menuitem" class="contact-email-action" data-action="copy">Copy</button></li>
+            <li role="none"><a href="mailto:charlottelf@protonmail.com" role="menuitem" class="contact-email-action">Email</a></li>
+          </ul>
         </li>
         <li class="contact-phone-wrap">
           <button type="button" class="contact-phone-trigger" aria-expanded="false" aria-haspopup="true" aria-controls="contact-phone-menu" id="contact-phone-trigger">206.981.8327</button>

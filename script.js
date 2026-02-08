@@ -1,6 +1,6 @@
 /**
  * Client-side behavior for char-lotte-anne: nav menu, scroll reveal,
- * back-to-top, contact (phone + email copy), footer year, scroll progress,
+ * back-to-top, contact (phone + email dropdowns: copy, open in app), footer year, scroll progress,
  * theme toggle, focus trap, section hash.
  */
 (function () {
@@ -9,26 +9,40 @@
 
   var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // Copy email + announce to screen readers
-  var emailCopyBtn = document.getElementById("contact-email-copy");
+  // Copy announce for screen readers (used by email and phone dropdowns)
   var copyAnnounce = document.getElementById("copy-announce");
-  var emailAddress = "charlottelf@protonmail.com";
   function announceCopy(message) {
     if (copyAnnounce) {
       copyAnnounce.textContent = message;
       setTimeout(function () { copyAnnounce.textContent = ""; }, 1500);
     }
   }
-  if (emailCopyBtn) {
-    emailCopyBtn.addEventListener("click", function () {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(emailAddress).then(function () {
-          var t = emailCopyBtn.textContent;
-          emailCopyBtn.textContent = "Copied!";
-          setTimeout(function () { emailCopyBtn.textContent = t; }, 1500);
-          announceCopy("Email copied to clipboard.");
-        });
-      }
+
+  // Contact email: dropdown with Copy, Email (same pattern as phone)
+  var emailTrigger = document.getElementById("contact-email-trigger");
+  var emailMenu = document.getElementById("contact-email-menu");
+  var emailAddress = "charlottelf@protonmail.com";
+  if (emailTrigger && emailMenu) {
+    emailTrigger.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var open = emailMenu.classList.toggle("is-open");
+      emailTrigger.setAttribute("aria-expanded", open);
+    });
+    var emailCopyBtn = emailMenu.querySelector('[data-action="copy"]');
+    if (emailCopyBtn) {
+      emailCopyBtn.addEventListener("click", function () {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(emailAddress).then(function () {
+            emailMenu.classList.remove("is-open");
+            emailTrigger.setAttribute("aria-expanded", "false");
+            announceCopy("Email copied to clipboard.");
+          });
+        }
+      });
+    }
+    document.addEventListener("click", function () {
+      emailMenu.classList.remove("is-open");
+      emailTrigger.setAttribute("aria-expanded", "false");
     });
   }
 

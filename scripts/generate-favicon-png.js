@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 /**
- * Generates favicon.png from favicon.svg for Safari/Vercel compatibility.
- * Run: node scripts/generate-favicon-png.js
- * Requires: npm install sharp (or run from project root after npm install)
+ * Generates favicon PNGs and icon.ico from favicon.svg (Safari/Vercel compatibility).
+ * Run: npm run favicon (or node scripts/generate-favicon-png.js from project root).
+ * Requires: npm install (sharp, svg-to-ico). Vercel runs this as the build step.
  */
-const fs = require("fs");
 const path = require("path");
 
 const root = path.join(__dirname, "..");
@@ -22,7 +21,6 @@ const svgToIco = require("svg-to-ico");
 const iconIcoPath = path.join(root, "icon.ico");
 
 Promise.all([
-  sharp(svgPath).resize(32, 32).png().toFile(path.join(root, "favicon.png")),
   sharp(svgPath).resize(32, 32).png().toFile(path.join(root, "icon.png")),
   sharp(svgPath).resize(16, 16).png().toFile(path.join(root, "favicon-16x16.png")),
   sharp(svgPath).resize(180, 180).png().toFile(path.join(root, "apple-touch-icon.png")),
@@ -35,7 +33,7 @@ Promise.all([
     })
   )
   .then(() => {
-    console.log("Wrote favicon.png, icon.png, favicon-16x16.png, apple-touch-icon.png, icon.ico");
+    console.log("Wrote icon.png, favicon-16x16.png, apple-touch-icon.png, icon.ico");
   })
   .catch((err) => {
     console.error(err);

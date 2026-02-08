@@ -863,27 +863,78 @@ main {
 }
 
 .contact-email-wrap {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
+  position: relative;
 }
 
-.contact-email-copy {
+.contact-email-trigger {
   font-family: inherit;
-  font-size: 0.85rem;
+  font-size: inherit;
   font-weight: 500;
   color: var(--accent);
   background: none;
   border: none;
-  padding: 0.2em 0;
+  padding: 0;
   cursor: pointer;
   text-decoration: none;
 }
 
-.contact-email-copy:hover {
+.contact-email-trigger:hover {
   color: var(--accent-hover);
   text-decoration: underline;
+}
+
+.contact-email-trigger:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.contact-email-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0.25rem 0;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  margin-top: 0.25rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-width: 8rem;
+  z-index: 10;
+  display: none;
+}
+
+.contact-email-menu.is-open {
+  display: block;
+}
+
+.contact-email-menu li {
+  margin: 0;
+}
+
+.contact-email-action {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text);
+  background: none;
+  border: none;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.contact-email-action:hover {
+  background: var(--border);
+}
+
+.contact-email-action:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
 }
 
 .contact-phone-wrap {
@@ -1031,6 +1082,110 @@ button:focus-visible {
 .back-to-top {
   min-width: 44px;
   min-height: 44px;
+}
+
+/* Mobile: compact header and hero, constrained card images so layout fits one screen */
+@media (max-width: 36em) {
+  .nav {
+    padding: var(--space-sm) var(--space);
+  }
+
+  .nav-bar {
+    gap: var(--space-sm);
+    min-width: 0;
+  }
+
+  .site-title {
+    font-size: 0.9375rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+    min-width: 0;
+    max-width: 60%;
+  }
+
+  .nav-actions {
+    flex-shrink: 0;
+    gap: var(--space-sm);
+  }
+
+  .nav .nav-resume {
+    padding: 0.5em 0.75em;
+    font-size: 0.9375rem;
+  }
+
+  .nav-menu-trigger {
+    padding: 0.5em 0.15em;
+    font-size: 0.9375rem;
+  }
+
+  main {
+    padding: 0 var(--space) var(--space-xl);
+  }
+
+  .hero {
+    padding: var(--space) 0 var(--space-lg);
+  }
+
+  .hero-portrait {
+    max-width: 10rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-title {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+
+  .hero-tagline {
+    font-size: 1.05rem;
+  }
+
+  .hero-location {
+    margin-bottom: 0.75em;
+  }
+
+  .hero-pitch {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-cta {
+    gap: var(--space-sm);
+  }
+
+  .section {
+    padding: var(--space-lg) 0;
+  }
+
+  .section-alt {
+    padding-left: var(--space);
+    padding-right: var(--space);
+  }
+
+  .job {
+    padding: var(--space);
+    gap: var(--space);
+  }
+
+  .job-photos,
+  .job-photos-single,
+  .job-photos-stack {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .job-photos img {
+    max-height: 10rem;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .job-photos-single img,
+  .job-photos-stack img {
+    max-height: 8rem;
+  }
 }
 
 /* Reduced motion: disable animations and theme transition */
