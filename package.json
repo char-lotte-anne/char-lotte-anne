@@ -2,7 +2,8 @@
   "name": "char-lotte-anne",
   "private": true,
   "scripts": {
-    "favicon": "node scripts/generate-favicon-png.js"
+    "favicon": "node scripts/generate-favicon-png.js",
+    "dev": "npx serve ."
   },
   "devDependencies": {
     "sharp": "^0.33.5"

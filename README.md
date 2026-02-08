@@ -36,7 +36,7 @@ Interests: **image processing**, **AI ethics**, **human-centered design**.
 | `styles.css` | Theming (DM Sans, Fraunces), dark mode, accessibility (focus, contrast) |
 | `script.js` | Nav, scroll reveal, back-to-top, contact behavior |
 | `vercel.json` | Deploy config, security headers, resume download behavior |
-| `favicon.ico` / `favicon.png` / `favicon-16x16.png` / `apple-touch-icon.png` / `safari-pinned-tab.svg` | Favicons (`npm run favicon`; .ico + mask-icon for Safari tab) |
+| `favicon.ico` / `favicon.png` / `favicon-16x16.png` / `apple-touch-icon.png` / `safari-pinned-tab.svg` | Favicons (`npm run favicon`; .ico + mask-icon for Safari tab). **Local:** run `npm run dev` (or `npx serve .`) and open http://localhost:3000 — Safari does not show favicons for `file://`. |
 | `resume.pdf` | Resume (downloadable from site) |
 | `images/` | Project previews and assets |
 | `scripts/` | Favicon build utilities |
