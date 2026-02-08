@@ -9,32 +9,39 @@
 ## What’s here
 
 - **About** — Background, technical skills, interests
-- **Experience** — Silfab Solar R&D, WWU research, teaching, outreach
-- **Projects** — Madame Mystique's Crystal Ball, Rent My Room, and other work
+- **Education** — WWU (CS, expected Mar 2026), Bainbridge High School
+- **Experience** — Silfab Solar R&D, WWU research, teaching, Bainbridge Review, outreach
+- **Projects** — Madame Mystique's Crystal Ball, Rent My Room, Quaternion demo (WWU CSCI 480)
 - **What I'm Looking For** — Ideal role and team (early-career, mission-positive, collaborative)
-- **Contact** — Email, phone, LinkedIn, GitHub
+- **Contact** — Resume download, email, phone (Copy/Text/Call), LinkedIn, GitHub
 
 ---
 
-## 🔬 Technical Highlights
+## Technical highlights
+
 - **R&D Intern at Silfab Solar:** Built image analysis tools for solar cell alignment using custom centroid detection algorithms and OpenCV-based visualization
 - **AI Ethics Researcher:** Co-developed a coding schema to evaluate ableist language in LLMs; designed prompts and analyzed output for fairness and accessibility
 - **Educational Projects:** Designed and implemented simulations and prototypes related to compiler construction, 3D transformations, and social impact education
 - **STEM Outreach Leader:** Taught coding to over 100 K–8 students; led summer camp programming and curriculum development
 
 ---
+
 ## Repo structure
 
 ```
-├── index.html    # Single-page site
-├── styles.css    # Styles (DM Sans, Fraunces, teal/cream theme)
-├── script.js     # Footer year, scroll reveal
-├── vercel.json   # Static deploy config
-├── images/       # Photos + optional project preview screenshots
+├── index.html       # Single-page site
+├── styles.css       # Styles (DM Sans, Fraunces, teal/cream theme)
+├── script.js        # Nav menu, scroll reveal, back-to-top, contact phone menu, footer year
+├── vercel.json      # Deploy config, security headers, resume download header
+├── favicon.svg      # Favicon (modern browsers)
+├── favicon.ico      # Favicon fallback (Safari/legacy) — generated via scripts/generate-favicon-ico.js
+├── resume.pdf       # Resume (download from header + Contact)
+├── images/          # Photos and project preview images
+├── scripts/         # Build utilities (e.g. favicon ICO generator)
 └── README.md
 ```
 
-**Optional:** Add project preview screenshots to `images/` for the Projects section: `guess-my-name-preview.jpg`, `rent-my-room-preview.jpg`, `quaternion-preview.jpg`. If missing, a gradient placeholder is shown.
+Project preview images in `images/` (e.g. `madame-mystique-preview.png`, `rent-my-room-preview.jpeg`, `quaternion-preview.jpeg`) are used in the Projects section; if an image is missing, a fallback placeholder is shown.
 
 ---
 

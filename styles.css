@@ -13,6 +13,7 @@
   --font-sans: "DM Sans", system-ui, sans-serif;
   --font-serif: "Fraunces", Georgia, serif;
   --space: 1.25rem;
+  --space-sm: 0.5rem;
   --space-lg: 2.5rem;
   --space-xl: 4rem;
   --max-width: 52rem;
@@ -101,20 +102,53 @@ a:hover {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: var(--space) var(--space-lg);
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space) var(--space-lg);
-  justify-content: center;
+  position: relative;
 }
 
-.nav a {
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space);
+}
+
+.site-title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+
+.site-title:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space);
+}
+
+.nav-menu-trigger {
+  font-family: var(--font-sans);
+  font-size: 1rem;
   font-weight: 500;
   color: var(--text-muted);
+  background: none;
+  border: none;
+  padding: 0.5em 0;
+  cursor: pointer;
   position: relative;
-  padding-bottom: 2px;
 }
 
-.nav a::after {
+.nav-menu-trigger:hover {
+  color: var(--accent);
+}
+
+.nav-menu-trigger::after {
   content: "";
   position: absolute;
   left: 0;
@@ -125,17 +159,61 @@ a:hover {
   transition: width 0.2s ease;
 }
 
-.nav a:hover {
+.nav-menu-trigger:hover::after {
+  width: 100%;
+}
+
+.nav-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: auto;
+  right: 0;
+  width: max-content;
+  min-width: 8rem;
+  margin-top: 2px;
+  padding: var(--space);
+  background: rgba(250, 248, 245, 0.98);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.nav.is-open .nav-menu {
+  display: flex;
+}
+
+.nav-menu a {
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 0.4em 0;
+  position: relative;
+  padding-bottom: 0.4em;
+}
+
+.nav-menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.2s ease;
+}
+
+.nav-menu a:hover {
   color: var(--text-muted);
   text-decoration: none;
 }
 
-.nav a:hover::after {
+.nav-menu a:hover::after {
   width: 100%;
 }
 
 .nav .nav-resume {
-  margin-left: var(--space);
   color: var(--accent);
   font-family: var(--font-sans);
   font-size: 1rem;

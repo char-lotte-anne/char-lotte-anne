@@ -1,9 +1,33 @@
+/**
+ * Client-side behavior for char-lotte-anne: nav menu, scroll reveal,
+ * back-to-top button, contact phone menu (Copy/Text/Call), footer year.
+ */
 (function () {
-  // Current year in footer
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  // Phone dropdown: Copy, Text, Call
+  // Nav menu: toggle dropdown; close on link click or outside click
+  var navTrigger = document.getElementById("nav-menu-trigger");
+  var navMenu = document.getElementById("nav-menu");
+  if (navTrigger && navMenu) {
+    navTrigger.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var open = navMenu.parentElement.classList.toggle("is-open");
+      navTrigger.setAttribute("aria-expanded", open);
+    });
+    navMenu.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        navMenu.parentElement.classList.remove("is-open");
+        navTrigger.setAttribute("aria-expanded", "false");
+      });
+    });
+    document.addEventListener("click", function () {
+      navMenu.parentElement.classList.remove("is-open");
+      navTrigger.setAttribute("aria-expanded", "false");
+    });
+  }
+
+  // Contact phone: dropdown with Copy, Text, Call
   var phoneTrigger = document.getElementById("contact-phone-trigger");
   var phoneMenu = document.getElementById("contact-phone-menu");
   var phoneNumber = "+12069818327";
@@ -30,7 +54,7 @@
     });
   }
 
-  // Scroll reveal: add .visible when element enters viewport, remove when it leaves (so it can reveal again)
+  // Scroll reveal: add .visible when element enters viewport (IntersectionObserver)
   var revealEls = document.querySelectorAll(".reveal");
   if (revealEls.length && "IntersectionObserver" in window) {
     var observer = new IntersectionObserver(
@@ -52,7 +76,7 @@
     });
   }
 
-  // Back to top: show when scrolled past hero, click scrolls to very top
+  // Back to top: show when hero is out of view; click scrolls to top
   var hero = document.getElementById("hero");
   var backToTop = document.getElementById("back-to-top");
   if (backToTop) {

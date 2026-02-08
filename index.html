@@ -7,11 +7,17 @@
   <meta property="og:title" content="Charlotte Larson Freeman — Software Engineer" />
   <meta property="og:description" content="New grad March 2026. Image processing, AI ethics, human-centered design. Production code on real teams." />
   <meta property="og:type" content="website" />
-  <!-- When live, set og:image to your full URL, e.g. https://yoursite.com/images/student-ambassador-portrait.jpg -->
+  <meta property="og:url" content="https://char-lotte-anne.vercel.app/" />
+  <meta property="og:image" content="https://char-lotte-anne.vercel.app/images/student-ambassador-portrait.jpg" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Charlotte Larson Freeman — Software Engineer" />
   <meta name="twitter:description" content="New grad March 2026. Image processing, AI ethics, human-centered design." />
+  <meta name="twitter:image" content="https://char-lotte-anne.vercel.app/images/student-ambassador-portrait.jpg" />
   <title>Charlotte Larson Freeman — Software Engineer</title>
+  <!-- Favicon: ICO (Safari/legacy) + SVG (modern browsers) -->
+  <link rel="icon" href="favicon.ico" sizes="32x32" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" sizes="any" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet" />
@@ -21,13 +27,21 @@
   <a href="#main" class="skip-link">Skip to main content</a>
   <header class="site-header">
     <nav class="nav" aria-label="Main">
-      <a href="#about">About</a>
-      <a href="#education">Education</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#looking-for">What I'm Looking For</a>
-      <a href="#contact">Contact</a>
-      <a href="resume.pdf" download="Charlotte-Larson-Freeman-Resume.pdf" class="btn btn-secondary nav-resume">Resume</a>
+      <div class="nav-bar">
+        <a href="#" class="site-title">Charlotte Larson Freeman</a>
+        <div class="nav-actions">
+          <a href="resume.pdf" download="Charlotte-Larson-Freeman-Resume.pdf" class="btn btn-secondary nav-resume">Resume</a>
+          <button type="button" class="nav-menu-trigger" aria-expanded="false" aria-controls="nav-menu" aria-haspopup="true" id="nav-menu-trigger">Menu</button>
+        </div>
+      </div>
+      <div class="nav-menu" id="nav-menu">
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#looking-for">What I'm Looking For</a>
+        <a href="#contact">Contact</a>
+      </div>
     </nav>
   </header>
 
@@ -88,7 +102,7 @@
             </div>
             <p class="job-desc"><strong>Focus:</strong> Image processing, AI ethics, human-centered design.</p>
             <ul class="job-desc-list">
-              <li>Salsa/Bachata Club · SWE/AGIC · Employee Language Program (Spanish) · <a href="https://www.wecodeconference.com" target="_blank" rel="noopener">WeCode</a> 2023</li>
+              <li>Salsa/Bachata Club · SWE/AGIC · Employee Language Program (Spanish) · <a href="https://www.wecodeconference.com" target="_blank" rel="noopener noreferrer">WeCode</a> 2023</li>
             </ul>
           </div>
           <div class="job-photos job-photos-single">
@@ -217,7 +231,7 @@
             </div>
             <ul>
               <li>Shadowed journalists; researched, interviewed, and wrote articles published in the local paper.</li>
-              <li>Sample work: <a href="https://www.bainbridgereview.com/news/chasing-the-vanishing-sun-a-road-trip-to-see-the-great-american-eclipse/" target="_blank" rel="noopener">Chasing the vanishing sun</a> (eclipse), <a href="https://www.bainbridgereview.com/news/owl-attacks-on-the-rise-around-the-pacific-northwest/" target="_blank" rel="noopener">Owl attacks on the rise</a>, <a href="https://www.bainbridgereview.com/news/up-in-the-sky-its-a-bird-its-a-plane-itsthe-bainbridge-ferry/" target="_blank" rel="noopener">Ferries Over Winslow</a> (art installation), <a href="https://www.bainbridgereview.com/opinion/join-a-virtual-celebration-of-earth-days-50th-anniversary-charlotte-larson-freeman/" target="_blank" rel="noopener">Earth Day’s 50th</a> (opinion).</li>
+              <li>Sample work: <a href="https://www.bainbridgereview.com/news/chasing-the-vanishing-sun-a-road-trip-to-see-the-great-american-eclipse/" target="_blank" rel="noopener noreferrer">Chasing the vanishing sun</a> (eclipse), <a href="https://www.bainbridgereview.com/news/owl-attacks-on-the-rise-around-the-pacific-northwest/" target="_blank" rel="noopener noreferrer">Owl attacks on the rise</a>, <a href="https://www.bainbridgereview.com/news/up-in-the-sky-its-a-bird-its-a-plane-itsthe-bainbridge-ferry/" target="_blank" rel="noopener noreferrer">Ferries Over Winslow</a> (art installation), <a href="https://www.bainbridgereview.com/opinion/join-a-virtual-celebration-of-earth-days-50th-anniversary-charlotte-larson-freeman/" target="_blank" rel="noopener noreferrer">Earth Day’s 50th</a> (opinion).</li>
             </ul>
           </div>
           <div class="job-photos job-photos-single">
@@ -225,15 +239,15 @@
           </div>
         </article>
       </div>
-      <p class="experience-note reveal">Earlier roles (YMCA camp, B.I.Cycle, Bainbridge Island Metro Park &amp; Recreation) on <a href="https://www.linkedin.com/in/clarsonfreeman/" target="_blank" rel="noopener">LinkedIn</a>.</p>
+      <p class="experience-note reveal">Earlier roles (YMCA camp, B.I.Cycle, Bainbridge Island Metro Park &amp; Recreation) on <a href="https://www.linkedin.com/in/clarsonfreeman/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.</p>
     </section>
 
     <section class="section" id="projects">
       <h2 class="section-title reveal">Projects</h2>
-      <p class="section-intro reveal">Things I’ve built and shipped. More on <a href="https://github.com/char-lotte-anne" target="_blank" rel="noopener">GitHub</a>.</p>
+      <p class="section-intro reveal">Things I’ve built and shipped. More on <a href="https://github.com/char-lotte-anne" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
       <div class="project-cards">
         <article class="project-card project-card-link reveal">
-          <a href="https://guess-my-name-chi.vercel.app" target="_blank" rel="noopener" class="project-preview-link">
+          <a href="https://guess-my-name-chi.vercel.app" target="_blank" rel="noopener noreferrer" class="project-preview-link">
             <div class="project-preview">
               <img src="images/madame-mystique-preview.png" alt="Madame Mystique's Crystal Ball" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22500%22 viewBox=%220 0 800 500%22%3E%3Crect fill=%22%23e8e6e3%22 width=%22800%22 height=%22500%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%235c5650%22 font-family=%22system-ui%22 font-size=%2218%22%3EPreview unavailable%3C/text%3E%3C/svg%3E';" />
             </div>
@@ -243,13 +257,13 @@
             <p class="project-url">guess-my-name-chi.vercel.app</p>
             <p class="project-desc">Quiz-based name prediction with rule-based filtering and a custom TensorFlow.js model (all in-browser, no external AI). Uses 47K+ SSA names, state and cultural data, and NPR/Namerology research. Interactive maps, optional feedback, and shareable results. Vanilla JS, deployed on Vercel.</p>
             <div class="project-links">
-              <a href="https://guess-my-name-chi.vercel.app" target="_blank" rel="noopener">Live site</a>
-              <a href="https://github.com/char-lotte-anne/guess-my-name" target="_blank" rel="noopener">GitHub</a>
+              <a href="https://guess-my-name-chi.vercel.app" target="_blank" rel="noopener noreferrer">Live site</a>
+              <a href="https://github.com/char-lotte-anne/guess-my-name" target="_blank" rel="noopener noreferrer">GitHub</a>
             </div>
           </div>
         </article>
         <article class="project-card project-card-link reveal">
-          <a href="https://rent-my-room-happy-valley.vercel.app" target="_blank" rel="noopener" class="project-preview-link">
+          <a href="https://rent-my-room-happy-valley.vercel.app" target="_blank" rel="noopener noreferrer" class="project-preview-link">
             <div class="project-preview">
               <img src="images/rent-my-room-preview.jpeg" alt="Rent My Room in Happy Valley" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22500%22 viewBox=%220 0 800 500%22%3E%3Crect fill=%22%23e8e6e3%22 width=%22800%22 height=%22500%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%235c5650%22 font-family=%22system-ui%22 font-size=%2218%22%3EPreview unavailable%3C/text%3E%3C/svg%3E';" />
             </div>
@@ -264,13 +278,13 @@
               <li>Vanilla HTML/CSS/JS · Vercel</li>
             </ul>
             <div class="project-links">
-              <a href="https://rent-my-room-happy-valley.vercel.app" target="_blank" rel="noopener">Live site</a>
-              <a href="https://github.com/char-lotte-anne/rent-my-room" target="_blank" rel="noopener">GitHub</a>
+              <a href="https://rent-my-room-happy-valley.vercel.app" target="_blank" rel="noopener noreferrer">Live site</a>
+              <a href="https://github.com/char-lotte-anne/rent-my-room" target="_blank" rel="noopener noreferrer">GitHub</a>
             </div>
           </div>
         </article>
         <article class="project-card project-card-link reveal">
-          <a href="https://facultyweb.cs.wwu.edu/~wehrwes/courses/csci480_24f/fp_demos/rotations/" target="_blank" rel="noopener" class="project-preview-link">
+          <a href="https://facultyweb.cs.wwu.edu/~wehrwes/courses/csci480_24f/fp_demos/rotations/" target="_blank" rel="noopener noreferrer" class="project-preview-link">
             <div class="project-preview">
               <img src="images/quaternion-preview.jpeg" alt="Quaternion rotation demo — CSCI 480" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22800%22 height=%22500%22 viewBox=%220 0 800 500%22%3E%3Crect fill=%22%23e8e6e3%22 width=%22800%22 height=%22500%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22%235c5650%22 font-family=%22system-ui%22 font-size=%2218%22%3EPreview unavailable%3C/text%3E%3C/svg%3E';" />
             </div>
@@ -280,7 +294,7 @@
             <p class="project-url">facultyweb.cs.wwu.edu/…/rotations/</p>
             <p class="project-desc">CSCI 480 (Computer Graphics) educational demo built with a grad and undergrad teammate. Visualizes 3D rotations with quaternions vs matrices, Lerp vs Slerp, and gimbal lock. Sphere, cube, pyramid; keyboard and slider controls. Hosted on WWU faculty site.</p>
             <div class="project-links">
-              <a href="https://facultyweb.cs.wwu.edu/~wehrwes/courses/csci480_24f/fp_demos/rotations/" target="_blank" rel="noopener">Live demo (WWU)</a>
+              <a href="https://facultyweb.cs.wwu.edu/~wehrwes/courses/csci480_24f/fp_demos/rotations/" target="_blank" rel="noopener noreferrer">Live demo (WWU)</a>
             </div>
           </div>
         </article>
@@ -325,8 +339,8 @@
             <li role="none"><a href="tel:+12069818327" role="menuitem" class="contact-phone-action">Call</a></li>
           </ul>
         </li>
-        <li><a href="https://www.linkedin.com/in/clarsonfreeman/" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li><a href="https://github.com/char-lotte-anne" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/clarsonfreeman/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="https://github.com/char-lotte-anne" target="_blank" rel="noopener noreferrer">GitHub</a></li>
       </ul>
     </section>
   </main>
