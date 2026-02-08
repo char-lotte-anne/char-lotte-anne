@@ -1,0 +1,10 @@
+{
+  "name": "char-lotte-anne",
+  "private": true,
+  "scripts": {
+    "favicon": "node scripts/generate-favicon-png.js"
+  },
+  "devDependencies": {
+    "sharp": "^0.33.5"
+  }
+}
