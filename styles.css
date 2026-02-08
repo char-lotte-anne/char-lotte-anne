@@ -134,6 +134,24 @@ a:hover {
   width: 100%;
 }
 
+.nav .nav-resume {
+  margin-left: var(--space);
+  color: var(--accent);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.6em 1.25em;
+  padding-bottom: 0.6em;
+}
+
+.nav .nav-resume:hover {
+  color: var(--accent-hover);
+}
+
+.nav .nav-resume::after {
+  display: none;
+}
+
 /* Main */
 main {
   max-width: var(--max-width);
