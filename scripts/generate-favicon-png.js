@@ -20,9 +20,10 @@ try {
 
 Promise.all([
   sharp(svgPath).resize(32, 32).png().toFile(path.join(root, "favicon.png")),
+  sharp(svgPath).resize(16, 16).png().toFile(path.join(root, "favicon-16x16.png")),
   sharp(svgPath).resize(180, 180).png().toFile(path.join(root, "apple-touch-icon.png")),
 ])
-  .then(() => console.log("Wrote favicon.png and apple-touch-icon.png"))
+  .then(() => console.log("Wrote favicon.png, favicon-16x16.png, apple-touch-icon.png"))
   .catch((err) => {
     console.error(err);
     process.exit(1);
