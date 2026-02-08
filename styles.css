@@ -69,6 +69,24 @@ a:hover {
   text-decoration: underline;
 }
 
+/* Skip link: for keyboard/screen reader users, visible on focus */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-lg);
+  z-index: 1000;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  color: var(--bg);
+  background: var(--accent);
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: var(--space);
+}
+
 /* Header */
 .site-header {
   position: sticky;
@@ -541,6 +559,14 @@ main {
 .contact-pitch {
   margin: 0 0 var(--space);
   color: var(--text-muted);
+}
+
+.contact-resume {
+  margin: 0 0 var(--space);
+}
+
+.contact-resume .btn {
+  display: inline-block;
 }
 
 .contact-links {
