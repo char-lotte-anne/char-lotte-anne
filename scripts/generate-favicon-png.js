@@ -18,17 +18,24 @@ try {
   process.exit(1);
 }
 
+const svgToIco = require("svg-to-ico");
+const iconIcoPath = path.join(root, "icon.ico");
+
 Promise.all([
   sharp(svgPath).resize(32, 32).png().toFile(path.join(root, "favicon.png")),
   sharp(svgPath).resize(32, 32).png().toFile(path.join(root, "icon.png")),
   sharp(svgPath).resize(16, 16).png().toFile(path.join(root, "favicon-16x16.png")),
   sharp(svgPath).resize(180, 180).png().toFile(path.join(root, "apple-touch-icon.png")),
 ])
+  .then(() =>
+    svgToIco({
+      input_name: svgPath,
+      output_name: iconIcoPath,
+      sizes: [16, 32],
+    })
+  )
   .then(() => {
-    const icoSrc = path.join(root, "favicon.ico");
-    const icoDest = path.join(root, "icon.ico");
-    if (fs.existsSync(icoSrc)) fs.copyFileSync(icoSrc, icoDest);
-    console.log("Wrote favicon.png, icon.png, favicon-16x16.png, apple-touch-icon.png" + (fs.existsSync(icoDest) ? ", icon.ico" : ""));
+    console.log("Wrote favicon.png, icon.png, favicon-16x16.png, apple-touch-icon.png, icon.ico");
   })
   .catch((err) => {
     console.error(err);

@@ -76,6 +76,11 @@ body {
   background: var(--bg);
 }
 
+/* Remove default focus outline so only :focus-visible (keyboard) shows our custom ring */
+:focus {
+  outline: none;
+}
+
 a {
   color: var(--accent);
   text-decoration: none;
