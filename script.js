@@ -18,13 +18,42 @@
     }
   }
 
-  // Contact email: dropdown with Copy, Email (same pattern as phone)
+  // Dropdown refs and close helpers (only one open at a time: nav, email, or phone)
   var emailTrigger = document.getElementById("contact-email-trigger");
   var emailMenu = document.getElementById("contact-email-menu");
+  var phoneTrigger = document.getElementById("contact-phone-trigger");
+  var phoneMenu = document.getElementById("contact-phone-menu");
+  var navTrigger = document.getElementById("nav-menu-trigger");
+  var navMenu = document.getElementById("nav-menu");
+  var navLinks = navMenu ? navMenu.querySelectorAll("a") : [];
+
+  function closeNavMenu(returnFocus) {
+    if (navMenu && navTrigger) {
+      navMenu.parentElement.classList.remove("is-open");
+      navTrigger.setAttribute("aria-expanded", "false");
+      if (returnFocus !== false) navTrigger.focus();
+    }
+  }
+  function closeEmailMenu() {
+    if (emailMenu && emailTrigger) {
+      emailMenu.classList.remove("is-open");
+      emailTrigger.setAttribute("aria-expanded", "false");
+    }
+  }
+  function closePhoneMenu() {
+    if (phoneMenu && phoneTrigger) {
+      phoneMenu.classList.remove("is-open");
+      phoneTrigger.setAttribute("aria-expanded", "false");
+    }
+  }
+
+  // Contact email: dropdown with Copy, Email (same pattern as phone)
   var emailAddress = "charlottelf@protonmail.com";
   if (emailTrigger && emailMenu) {
     emailTrigger.addEventListener("click", function (e) {
       e.stopPropagation();
+      closeNavMenu(false);
+      closePhoneMenu();
       var open = emailMenu.classList.toggle("is-open");
       emailTrigger.setAttribute("aria-expanded", open);
     });
@@ -41,8 +70,9 @@
       });
     }
     document.addEventListener("click", function () {
-      emailMenu.classList.remove("is-open");
-      emailTrigger.setAttribute("aria-expanded", "false");
+      closeEmailMenu();
+      closeNavMenu();
+      closePhoneMenu();
     });
   }
 
@@ -77,18 +107,11 @@
   }
 
   // Nav menu: toggle, close on link/outside click, focus trap, Escape
-  var navTrigger = document.getElementById("nav-menu-trigger");
-  var navMenu = document.getElementById("nav-menu");
-  var navLinks = navMenu ? navMenu.querySelectorAll("a") : [];
-  function closeNavMenu() {
-    if (!navMenu || !navTrigger) return;
-    navMenu.parentElement.classList.remove("is-open");
-    navTrigger.setAttribute("aria-expanded", "false");
-    navTrigger.focus();
-  }
   if (navTrigger && navMenu) {
     navTrigger.addEventListener("click", function (e) {
       e.stopPropagation();
+      closeEmailMenu();
+      closePhoneMenu();
       var open = navMenu.parentElement.classList.toggle("is-open");
       navTrigger.setAttribute("aria-expanded", open);
       if (open) {
@@ -110,6 +133,8 @@
     });
     document.addEventListener("click", function () {
       closeNavMenu();
+      closeEmailMenu();
+      closePhoneMenu();
     });
     // Focus trap: Tab / Shift+Tab wrap within menu when open
     navMenu.addEventListener("keydown", function (e) {
@@ -125,12 +150,12 @@
   }
 
   // Contact phone: dropdown with Copy, Text, Call
-  var phoneTrigger = document.getElementById("contact-phone-trigger");
-  var phoneMenu = document.getElementById("contact-phone-menu");
   var phoneNumber = "+12069818327";
   if (phoneTrigger && phoneMenu) {
     phoneTrigger.addEventListener("click", function (e) {
       e.stopPropagation();
+      closeNavMenu(false);
+      closeEmailMenu();
       var open = phoneMenu.classList.toggle("is-open");
       phoneTrigger.setAttribute("aria-expanded", open);
     });
@@ -147,8 +172,9 @@
       });
     }
     document.addEventListener("click", function () {
-      phoneMenu.classList.remove("is-open");
-      phoneTrigger.setAttribute("aria-expanded", "false");
+      closeEmailMenu();
+      closeNavMenu();
+      closePhoneMenu();
     });
   }
 
