@@ -36,7 +36,7 @@ Interests: **image processing**, **AI ethics**, **human-centered design**.
 | `styles.css` | Theming (DM Sans, Fraunces), dark mode, accessibility (focus, contrast) |
 | `script.js` | Nav, scroll reveal, back-to-top, contact behavior |
 | `vercel.json` | Deploy config, security headers, resume download behavior |
-| `favicon.png` / `favicon.svg` | Favicon (PNG generated via `npm run favicon`) |
+| `favicon.ico` / `favicon.png` / `apple-touch-icon.png` | Favicons (PNG + 180×180 from `npm run favicon`; .ico committed) |
 | `resume.pdf` | Resume (downloadable from site) |
 | `images/` | Project previews and assets |
 | `scripts/` | Favicon build utilities |
