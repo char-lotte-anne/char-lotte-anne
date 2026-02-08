@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://char-lotte-anne.vercel.app/sitemap.xml
