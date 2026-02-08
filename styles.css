@@ -108,7 +108,8 @@ a:hover {
 }
 
 .nav a:hover {
-  color: var(--accent);
+  color: var(--text-muted);
+  text-decoration: none;
 }
 
 .nav a:hover::after {
@@ -144,6 +145,7 @@ main {
   font-weight: 700;
   margin: 0 0 0.25em;
   color: var(--text);
+  text-align: center;
 }
 
 .hero-tagline {
@@ -554,6 +556,71 @@ main {
   font-weight: 500;
 }
 
+.contact-phone-wrap {
+  position: relative;
+}
+
+.contact-phone-trigger {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 500;
+  color: var(--accent);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.contact-phone-trigger:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+.contact-phone-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0.25rem 0;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  margin-top: 0.25rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-width: 8rem;
+  z-index: 10;
+  display: none;
+}
+
+.contact-phone-menu.is-open {
+  display: block;
+}
+
+.contact-phone-menu li {
+  margin: 0;
+}
+
+.contact-phone-action {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text);
+  background: none;
+  border: none;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.contact-phone-action:hover {
+  background: var(--border);
+}
+
 /* Footer */
 .site-footer {
   text-align: center;
@@ -565,4 +632,41 @@ main {
 
 .site-footer p {
   margin: 0;
+}
+
+/* Back to top: bottom-right, visible after scrolling past hero */
+.back-to-top {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--bg);
+  background: var(--accent);
+  border: none;
+  border-radius: 50%;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.5rem);
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+}
+
+.back-to-top:hover {
+  color: var(--bg);
+  background: var(--accent-hover);
+  text-decoration: none;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
