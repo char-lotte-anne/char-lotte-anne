@@ -1,14 +1,18 @@
-# 👋 Hi, I’m Charlotte Larson Freeman
+# Charlotte Larson Freeman
 
-I'm a CS undergrad at Western Washington University, graduating in March 2026. My interests live at the intersection of **AI ethics**, **systems programming**, and **human-centered design** — especially where software can improve fairness, accessibility, and user experience.
+**Personal website** — portfolio, experience, and what I'm looking for in my first full-time role.
+
+🌐 **Live site:** [char-lotte-anne.vercel.app](https://char-lotte-anne.vercel.app)
 
 ---
 
-## 👩‍🔬 What I’m Passionate About
-- Building software that’s not just functional, but **ethical and inclusive**
-- Exploring **bias and accessibility in AI**
-- Developing **interactive tools** that make complex topics (like quaternion math or social media literacy) more engaging and understandable
-- Applying **low-level systems knowledge** to practical, impactful software projects
+## What’s here
+
+- **About** — Background, technical skills, interests
+- **Experience** — Silfab Solar R&D, WWU research, teaching, outreach
+- **Projects** — Madame Mystique's Crystal Ball, Rent My Room, and other work
+- **What I'm Looking For** — Ideal role and team (early-career, mission-positive, collaborative)
+- **Contact** — Email, phone, LinkedIn, GitHub
 
 ---
 
@@ -19,28 +23,27 @@ I'm a CS undergrad at Western Washington University, graduating in March 2026. M
 - **STEM Outreach Leader:** Taught coding to over 100 K–8 students; led summer camp programming and curriculum development
 
 ---
+## Repo structure
 
-## 🗂️ GitHub Projects — Coming Soon
+```
+├── index.html    # Single-page site
+├── styles.css    # Styles (DM Sans, Fraunces, teal/cream theme)
+├── script.js     # Footer year, scroll reveal
+├── vercel.json   # Static deploy config
+├── images/       # Photos + optional project preview screenshots
+└── README.md
+```
 
-Due to academic integrity and confidentiality policies, many of my past projects can't be shared publicly. I'm currently in the process of rebuilding and documenting new projects here on GitHub, including:
-
-- A **quaternion rotation demo** with interactive scenes
-- A **simulated stock trading strategy**
-- Visual tools and analysis code similar to my **solar image processing work**
-
-🦾 In the meantime, feel free to check out my [LinkedIn](https://www.linkedin.com/in/clarsonfreeman/) or contact me directly to discuss the technical details of my work.
-
----
-
-## 🎒 Currently Learning
-- React & TypeScript for building interactive UIs
-- Go for systems and back-end development
-- Evaluative frameworks for AI and agent architecture
+**Optional:** Add project preview screenshots to `images/` for the Projects section: `guess-my-name-preview.jpg`, `rent-my-room-preview.jpg`, `quaternion-preview.jpg`. If missing, a gradient placeholder is shown.
 
 ---
 
-## 🫡 Let's Connect
-- 📬 Email: [charlottelf@protonmail.com](mailto:charlottelf@protonmail.com)
-- 👩‍💻 LinkedIn: [linkedin.com/in/clarsonfreeman](https://www.linkedin.com/in/clarsonfreeman)
+## Elsewhere
 
-Thanks for stopping by — and stay tuned as I bring more of my work online!
+- **Rent My Room:** [rent-my-room-happy-valley.vercel.app](https://rent-my-room-happy-valley.vercel.app) · [GitHub](https://github.com/char-lotte-anne/rent-my-room)
+- **Guess My Name (Madame Mystique):** [guess-my-name-chi.vercel.app](https://guess-my-name-chi.vercel.app) · [GitHub](https://github.com/char-lotte-anne/guess-my-name)
+- **Quaternion Rotation Demo (WWU CSCI 480):** [facultyweb.cs.wwu.edu/…/rotations/](https://facultyweb.cs.wwu.edu/~wehrwes/courses/csci480_24f/fp_demos/rotations/)
+
+---
+
+I'm a CS undergrad at Western Washington University, graduating March 2026. I care about **image processing**, **AI ethics**, and **human-centered design**. If that sounds like a fit for your team, [get in touch](mailto:charlottelf@protonmail.com).
