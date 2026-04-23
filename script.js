@@ -50,13 +50,69 @@
   // Contact email: dropdown with Copy, Email (same pattern as phone)
   var emailAddress = "charlottelf@protonmail.com";
   if (emailTrigger && emailMenu) {
-    emailTrigger.addEventListener("click", function (e) {
-      e.stopPropagation();
+    var emailCloseTimeout = null;
+    
+    function cancelEmailClose() {
+      if (emailCloseTimeout) {
+        clearTimeout(emailCloseTimeout);
+        emailCloseTimeout = null;
+      }
+    }
+    
+    function scheduleEmailClose() {
+      cancelEmailClose();
+      if (!emailTrigger.classList.contains("is-clicked")) {
+        emailCloseTimeout = setTimeout(function() {
+          emailMenu.classList.remove("is-open");
+          emailTrigger.setAttribute("aria-expanded", "false");
+        }, 150); // Small delay to allow moving from trigger to menu
+      }
+    }
+    
+    // Hover handlers - show immediately, close with delay
+    emailTrigger.addEventListener("mouseenter", function() {
+      cancelEmailClose();
       closeNavMenu(false);
       closePhoneMenu();
-      var open = emailMenu.classList.toggle("is-open");
-      emailTrigger.setAttribute("aria-expanded", open);
+      emailMenu.classList.add("is-open");
+      emailTrigger.setAttribute("aria-expanded", "true");
     });
+    
+    emailTrigger.addEventListener("mouseleave", function() {
+      scheduleEmailClose();
+    });
+    
+    emailMenu.addEventListener("mouseenter", function() {
+      // Cancel any pending close when mouse enters menu
+      cancelEmailClose();
+      emailMenu.classList.add("is-open");
+      emailTrigger.setAttribute("aria-expanded", "true");
+    });
+    
+    emailMenu.addEventListener("mouseleave", function() {
+      scheduleEmailClose();
+    });
+    
+    // Click handler - toggle persistent state
+    emailTrigger.addEventListener("click", function (e) {
+      e.stopPropagation();
+      cancelEmailClose();
+      closeNavMenu(false);
+      closePhoneMenu();
+      var isCurrentlyClicked = emailTrigger.classList.contains("is-clicked");
+      if (isCurrentlyClicked) {
+        // Currently persistent, make it close
+        emailTrigger.classList.remove("is-clicked");
+        emailMenu.classList.remove("is-open");
+        emailTrigger.setAttribute("aria-expanded", "false");
+      } else {
+        // Not persistent, make it stay open
+        emailTrigger.classList.add("is-clicked");
+        emailMenu.classList.add("is-open");
+        emailTrigger.setAttribute("aria-expanded", "true");
+      }
+    });
+    
     var emailCopyBtn = emailMenu.querySelector('[data-action="copy"]');
     if (emailCopyBtn) {
       emailCopyBtn.addEventListener("click", function () {
@@ -64,13 +120,16 @@
           navigator.clipboard.writeText(emailAddress).then(function () {
             emailMenu.classList.remove("is-open");
             emailTrigger.setAttribute("aria-expanded", "false");
+            emailTrigger.classList.remove("is-clicked");
             announceCopy("Email copied to clipboard.");
           });
         }
       });
     }
     document.addEventListener("click", function () {
+      cancelEmailClose();
       closeEmailMenu();
+      emailTrigger.classList.remove("is-clicked");
       closeNavMenu();
       closePhoneMenu();
     });
@@ -108,19 +167,74 @@
 
   // Nav menu: toggle, close on link/outside click, focus trap, Escape
   if (navTrigger && navMenu) {
-    navTrigger.addEventListener("click", function (e) {
-      e.stopPropagation();
+    var navCloseTimeout = null;
+    
+    function cancelNavClose() {
+      if (navCloseTimeout) {
+        clearTimeout(navCloseTimeout);
+        navCloseTimeout = null;
+      }
+    }
+    
+    function scheduleNavClose() {
+      cancelNavClose();
+      if (!navTrigger.classList.contains("is-clicked")) {
+        navCloseTimeout = setTimeout(function() {
+          navMenu.parentElement.classList.remove("is-open");
+          navTrigger.setAttribute("aria-expanded", "false");
+        }, 150); // Small delay to allow moving from trigger to menu
+      }
+    }
+    
+    // Hover handlers - show immediately, close with delay
+    navTrigger.addEventListener("mouseenter", function() {
+      cancelNavClose();
       closeEmailMenu();
       closePhoneMenu();
-      var open = navMenu.parentElement.classList.toggle("is-open");
-      navTrigger.setAttribute("aria-expanded", open);
-      if (open) {
+      navMenu.parentElement.classList.add("is-open");
+      navTrigger.setAttribute("aria-expanded", "true");
+    });
+    
+    navTrigger.addEventListener("mouseleave", function() {
+      scheduleNavClose();
+    });
+    
+    navMenu.addEventListener("mouseenter", function() {
+      // Cancel any pending close when mouse enters menu
+      cancelNavClose();
+      navMenu.parentElement.classList.add("is-open");
+      navTrigger.setAttribute("aria-expanded", "true");
+    });
+    
+    navMenu.addEventListener("mouseleave", function() {
+      scheduleNavClose();
+    });
+    
+    // Click handler - toggle persistent state
+    navTrigger.addEventListener("click", function (e) {
+      e.stopPropagation();
+      cancelNavClose();
+      closeEmailMenu();
+      closePhoneMenu();
+      var isCurrentlyClicked = navTrigger.classList.contains("is-clicked");
+      if (isCurrentlyClicked) {
+        // Currently persistent, make it close
+        navTrigger.classList.remove("is-clicked");
+        navMenu.parentElement.classList.remove("is-open");
+        navTrigger.setAttribute("aria-expanded", "false");
+      } else {
+        // Not persistent, make it stay open
+        navTrigger.classList.add("is-clicked");
+        navMenu.parentElement.classList.add("is-open");
+        navTrigger.setAttribute("aria-expanded", "true");
         if (navLinks.length) navLinks[0].focus();
       }
     });
+    
     navLinks.forEach(function (link) {
       link.addEventListener("click", function () {
         closeNavMenu();
+        navTrigger.classList.remove("is-clicked");
       });
     });
     navMenu.addEventListener("click", function (e) {
@@ -130,9 +244,12 @@
       if (e.key !== "Escape") return;
       e.preventDefault();
       closeNavMenu();
+      navTrigger.classList.remove("is-clicked");
     });
     document.addEventListener("click", function () {
+      cancelNavClose();
       closeNavMenu();
+      navTrigger.classList.remove("is-clicked");
       closeEmailMenu();
       closePhoneMenu();
     });
@@ -152,13 +269,69 @@
   // Contact phone: dropdown with Copy, Text, Call
   var phoneNumber = "+12069818327";
   if (phoneTrigger && phoneMenu) {
-    phoneTrigger.addEventListener("click", function (e) {
-      e.stopPropagation();
+    var phoneCloseTimeout = null;
+    
+    function cancelPhoneClose() {
+      if (phoneCloseTimeout) {
+        clearTimeout(phoneCloseTimeout);
+        phoneCloseTimeout = null;
+      }
+    }
+    
+    function schedulePhoneClose() {
+      cancelPhoneClose();
+      if (!phoneTrigger.classList.contains("is-clicked")) {
+        phoneCloseTimeout = setTimeout(function() {
+          phoneMenu.classList.remove("is-open");
+          phoneTrigger.setAttribute("aria-expanded", "false");
+        }, 150); // Small delay to allow moving from trigger to menu
+      }
+    }
+    
+    // Hover handlers - show immediately, close with delay
+    phoneTrigger.addEventListener("mouseenter", function() {
+      cancelPhoneClose();
       closeNavMenu(false);
       closeEmailMenu();
-      var open = phoneMenu.classList.toggle("is-open");
-      phoneTrigger.setAttribute("aria-expanded", open);
+      phoneMenu.classList.add("is-open");
+      phoneTrigger.setAttribute("aria-expanded", "true");
     });
+    
+    phoneTrigger.addEventListener("mouseleave", function() {
+      schedulePhoneClose();
+    });
+    
+    phoneMenu.addEventListener("mouseenter", function() {
+      // Cancel any pending close when mouse enters menu
+      cancelPhoneClose();
+      phoneMenu.classList.add("is-open");
+      phoneTrigger.setAttribute("aria-expanded", "true");
+    });
+    
+    phoneMenu.addEventListener("mouseleave", function() {
+      schedulePhoneClose();
+    });
+    
+    // Click handler - toggle persistent state
+    phoneTrigger.addEventListener("click", function (e) {
+      e.stopPropagation();
+      cancelPhoneClose();
+      closeNavMenu(false);
+      closeEmailMenu();
+      var isCurrentlyClicked = phoneTrigger.classList.contains("is-clicked");
+      if (isCurrentlyClicked) {
+        // Currently persistent, make it close
+        phoneTrigger.classList.remove("is-clicked");
+        phoneMenu.classList.remove("is-open");
+        phoneTrigger.setAttribute("aria-expanded", "false");
+      } else {
+        // Not persistent, make it stay open
+        phoneTrigger.classList.add("is-clicked");
+        phoneMenu.classList.add("is-open");
+        phoneTrigger.setAttribute("aria-expanded", "true");
+      }
+    });
+    
     var copyBtn = phoneMenu.querySelector('[data-action="copy"]');
     if (copyBtn) {
       copyBtn.addEventListener("click", function () {
@@ -166,15 +339,18 @@
           navigator.clipboard.writeText(phoneNumber).then(function () {
             phoneMenu.classList.remove("is-open");
             phoneTrigger.setAttribute("aria-expanded", "false");
+            phoneTrigger.classList.remove("is-clicked");
             if (typeof announceCopy === "function") announceCopy("Phone number copied to clipboard.");
           });
         }
       });
     }
     document.addEventListener("click", function () {
+      cancelPhoneClose();
       closeEmailMenu();
       closeNavMenu();
       closePhoneMenu();
+      phoneTrigger.classList.remove("is-clicked");
     });
   }
 
@@ -282,4 +458,5 @@
       if (link.getAttribute("href") === "#" + id) link.setAttribute("aria-current", "location");
     });
   }
+
 })();

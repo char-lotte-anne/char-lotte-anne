@@ -1,6 +1,6 @@
 # Charlotte Larson Freeman — Portfolio
 
-Personal site showcasing background, projects, and what she’s looking for in her first full-time role (CS grad expected March 2026, Western Washington University).
+Personal site showcasing background, projects, and what she’s looking for in her first full-time role (CS grad, March 2026, Western Washington University).
 
 **Live site:** [char-lotte-anne.vercel.app](https://char-lotte-anne.vercel.app)
 
@@ -9,7 +9,7 @@ Personal site showcasing background, projects, and what she’s looking for in h
 ## What you’ll find on the site
 
 - **About** — Background, technical skills, and interests
-- **Education** — WWU (CS, expected Mar 2026), Bainbridge High School
+- **Education** — WWU (CS, Mar 2026), Bainbridge High School
 - **Experience** — Silfab Solar R&D, WWU research, teaching, Bainbridge Review, outreach
 - **Projects** — Madame Mystique's Crystal Ball, Rent My Room, Quaternion demo (WWU CSCI 480)
 - **What I’m Looking For** — Ideal role and team (early-career, mission-positive, collaborative)

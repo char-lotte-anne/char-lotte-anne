@@ -762,6 +762,19 @@ main {
   display: none;
 }
 
+.project-meta {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0 0 0.5em;
+}
+
+.project-card:not(.project-card-link):not(.project-card-muted) .project-desc {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text);
+  margin: 0 0 0.75em;
+}
+
 .project-bullets {
   margin: 0 0 0.75em;
   padding-left: 1.25em;
@@ -1084,6 +1097,33 @@ button:focus-visible {
   min-height: 44px;
 }
 
+/* Back to top tooltip on hover */
+.back-to-top-tooltip {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  margin-bottom: 0.5rem;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--bg);
+  background: var(--accent-hover);
+  border-radius: var(--radius);
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.25rem);
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+.back-to-top:hover .back-to-top-tooltip,
+.back-to-top:focus-visible .back-to-top-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
 /* Mobile: compact header and hero, constrained card images so layout fits one screen */
 @media (max-width: 36em) {
   .nav {
@@ -1266,4 +1306,11 @@ button:focus-visible {
 [data-theme="dark"] .back-to-top,
 [data-theme="dark"] .back-to-top:hover {
   color: var(--bg);
+}
+
+/* Reduced motion: disable animation */
+@media (prefers-reduced-motion: reduce) {
+  .back-to-top-tooltip {
+    transition: none;
+  }
 }
