@@ -27,8 +27,7 @@ const PRINT_AND_TOC_CSS = `
 .print-toc { display: none; }
 
 @media screen {
-  /* Show a "this is the offline portfolio" banner only when viewed as HTML.
-     Not sticky — it scrolls away so it doesn't fight the sticky site header. */
+  /* Banner only shown when viewed as HTML. Not sticky so it doesn't overlap the site header. */
   .offline-banner {
     background: #2d6a6a; color: #fff;
     padding: 0.5rem 1rem; font-size: 0.85rem;
@@ -38,7 +37,36 @@ const PRINT_AND_TOC_CSS = `
 }
 
 @media print {
-  /* Hide the banner and everything that doesn't belong on paper. */
+  /* Critical: tell Chrome to honor background colors, gradients, and shadows in print
+     output. Without this, the warm cream palette and card backgrounds get stripped. */
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  /* Disable transitions/animations in print — no smooth scroll, no fades. */
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  /* Force the light theme palette regardless of the OS setting at render time. */
+  html,
+  html[data-theme="dark"] {
+    background: #faf8f5 !important;
+    color: #1a1816 !important;
+  }
+  body {
+    background: #faf8f5 !important;
+    color: #1a1816 !important;
+  }
+
+  /* Hide things that only make sense on a screen. */
   .offline-banner,
   .scroll-progress,
   .back-to-top,
@@ -46,42 +74,26 @@ const PRINT_AND_TOC_CSS = `
   .nav-actions,
   .nav-menu-trigger,
   .nav-menu,
-  .skip-link,
-  .hero-bg { display: none !important; }
+  .skip-link { display: none !important; }
 
-  /* Override the dark theme so PDFs always render light, regardless of viewer setting. */
-  html, html[data-theme="dark"] { background: #fff !important; color: #1c1a17 !important; }
-  body { background: #fff !important; color: #1c1a17 !important; }
+  /* Header stays visible but doesn't try to be sticky on paper. */
+  .site-header {
+    position: static !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
 
-  /* Force every reveal element on, since IntersectionObserver may not fire in print. */
+  /* Reveal animations may not trigger during PDF rendering, force everything visible. */
   .reveal,
-  .reveal.visible { opacity: 1 !important; transform: none !important; visibility: visible !important; }
+  .reveal.visible {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+  }
 
-  /* Site header collapses to a clean banner. */
-  .site-header { position: static !important; box-shadow: none !important; border-bottom: 1px solid #d9d4cc !important; }
-  .nav { padding: 0.4rem 0 !important; }
-  .nav-bar { padding: 0 !important; }
-  .site-title { font-size: 0.95rem !important; }
-
-  /* Hero shrinks so the doc starts with substance, not a big portrait. */
-  .hero { min-height: auto !important; padding: 0.6rem 0 0.4rem !important; }
-  .hero-portrait { width: 110px !important; height: 110px !important; }
-  .hero-title { font-size: 1.6rem !important; margin: 0.4rem 0 0.2rem !important; }
-  .hero-tagline, .hero-location { margin: 0.1rem 0 !important; }
-  .hero-pitch { margin: 0.4rem 0 0 !important; font-size: 0.95rem !important; }
-  .hero-cta { display: none !important; }
-
-  /* Sections: tighten spacing, allow natural page breaks. */
-  .section { padding: 0.6rem 0 0.4rem !important; }
-  .section-title { font-size: 1.3rem !important; margin: 0.4rem 0 0.5rem !important; page-break-after: avoid; }
-
-  /* Avoid breaking individual job/project entries across pages. */
-  .job, .project-card, .about-callout, .timeline > article { break-inside: avoid; page-break-inside: avoid; }
-
-  /* Make all links visible in print (URLs are already typed out where needed). */
-  a, a:visited { color: #2d6a6a !important; text-decoration: underline; }
-
-  /* Contact dropdowns — show static, no hover behavior in PDF. */
+  /* Hide hover-only contact dropdowns; keep the email/phone text inline and underlined. */
+  .contact-email-menu,
+  .contact-phone-menu { display: none !important; }
   .contact-email-trigger,
   .contact-phone-trigger {
     background: none !important;
@@ -92,77 +104,105 @@ const PRINT_AND_TOC_CSS = `
     cursor: text;
     font: inherit;
   }
-  .contact-email-menu,
-  .contact-phone-menu { display: none !important; }
 
-  /* Photos: cap their print size so they don't dominate a page. */
+  /* Page-break hygiene: don't split entries or orphan section titles. */
+  .job,
+  .project-card,
+  .about-callout,
+  .timeline > article { break-inside: avoid; page-break-inside: avoid; }
+  .section-title,
+  h3 { break-after: avoid; page-break-after: avoid; }
+  .hero { break-after: avoid; page-break-after: avoid; }
+
+  /* Cap photo heights so a single image can't take a whole page. */
   .job-photos img,
   .project-preview img {
-    max-height: 2.4in !important;
+    max-height: 3.2in !important;
     width: auto !important;
     object-fit: contain !important;
   }
 
-  /* Show the table of contents only in the printed/PDF version. */
+  /* Printable table of contents — appears as the first page of the PDF. */
   .print-toc {
     display: block !important;
     break-after: page;
     page-break-after: always;
-    padding: 0.8rem 0 0.4rem;
+    max-width: 52rem;
+    margin: 0 auto;
+    padding: 1.2rem 1.5rem 0.5rem;
+    color: #1a1816;
   }
   .print-toc h2 {
     font-family: "Fraunces", Georgia, serif;
-    font-size: 1.6rem;
-    margin: 0 0 0.6rem;
+    font-weight: 600;
+    font-size: 2rem;
+    margin: 0 0 0.4rem;
+    color: #1a1816;
+  }
+  .print-toc .print-toc-sub {
+    color: #5c5650;
+    margin: 0 0 1.2rem;
+    font-size: 1rem;
   }
   .print-toc ol {
-    list-style: decimal inside;
+    list-style: none;
     padding: 0;
-    margin: 0;
-    font-size: 1.05rem;
-    line-height: 1.9;
+    margin: 0 0 1.5rem;
+    font-size: 1.1rem;
+    line-height: 2;
+    border-top: 1px solid #e2ddd6;
+  }
+  .print-toc li {
+    border-bottom: 1px solid #e2ddd6;
+    padding: 0.3rem 0;
+    display: flex;
+    justify-content: space-between;
   }
   .print-toc li a {
-    color: #1c1a17 !important;
+    color: #1a1816 !important;
     text-decoration: none;
+    font-weight: 500;
+  }
+  .print-toc li .print-toc-num {
+    color: #5c5650;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.95rem;
   }
   .print-toc .print-toc-meta {
-    margin-top: 1rem;
-    font-size: 0.9rem;
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
     color: #5c5650;
+    line-height: 1.6;
   }
+  .print-toc .print-toc-meta p { margin: 0.25rem 0; }
   .print-toc .print-toc-meta a { color: #2d6a6a !important; text-decoration: underline; }
-
-  /* Footer */
-  .site-footer { border-top: 1px solid #d9d4cc; padding: 0.4rem 0 !important; }
 }
 
 @page {
   size: Letter;
-  margin: 0.5in 0.55in 0.55in 0.55in;
+  margin: 0.55in 0.6in 0.6in 0.6in;
 }
 `;
 
 const TOC_HTML = `
 <section class="print-toc" aria-label="Table of contents">
-  <h2>Charlotte Larson Freeman — Portfolio</h2>
-  <p style="margin:0 0 0.8rem; color:#5c5650; font-size:0.95rem;">
-    Software Engineer · New grad, March 2026 · Bellingham, WA
-  </p>
+  <h2>Charlotte Larson Freeman</h2>
+  <p class="print-toc-sub">Software developer · New grad, March 2026 · Bellingham, WA</p>
   <ol>
-    <li><a href="#about">About</a></li>
-    <li><a href="#education">Education</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#projects">Projects (incl. live AI project)</a></li>
-    <li><a href="#looking-for">What I'm Looking For</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#about">About</a><span class="print-toc-num">01</span></li>
+    <li><a href="#education">Education</a><span class="print-toc-num">02</span></li>
+    <li><a href="#experience">Experience</a><span class="print-toc-num">03</span></li>
+    <li><a href="#projects">Projects (incl. live AI project)</a><span class="print-toc-num">04</span></li>
+    <li><a href="#looking-for">What I'm Looking For</a><span class="print-toc-num">05</span></li>
+    <li><a href="#contact">Contact</a><span class="print-toc-num">06</span></li>
   </ol>
   <div class="print-toc-meta">
     <p><strong>Live site:</strong> <a href="https://char-lotte-anne.vercel.app/">char-lotte-anne.vercel.app</a></p>
     <p><strong>Featured AI project:</strong> Madame Mystique's Crystal Ball —
       <a href="https://guess-my-name-chi.vercel.app">guess-my-name-chi.vercel.app</a>
-      (rule-based filtering + custom in-browser TensorFlow.js model).</p>
-    <p><strong>GitHub:</strong> <a href="https://github.com/char-lotte-anne">github.com/char-lotte-anne</a> · <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/clarsonfreeman/">linkedin.com/in/clarsonfreeman</a></p>
+      (rule-based filtering + a custom in-browser TensorFlow.js model)</p>
+    <p><strong>GitHub:</strong> <a href="https://github.com/char-lotte-anne">github.com/char-lotte-anne</a> &nbsp;·&nbsp;
+       <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/clarsonfreeman/">linkedin.com/in/clarsonfreeman</a></p>
   </div>
 </section>
 `;
@@ -172,6 +212,53 @@ const OFFLINE_BANNER_HTML = `
   Offline portfolio. Live version: <a href="https://char-lotte-anne.vercel.app/" target="_blank" rel="noopener noreferrer">char-lotte-anne.vercel.app</a>
 </div>
 `;
+
+/**
+ * Fetch the Google Fonts stylesheet and inline every woff2 file as a base64 data URI.
+ * We pretend to be a modern Chrome (so Google returns woff2, not older formats), and
+ * we keep only the latin subset to keep the file size reasonable.
+ */
+async function fetchInlinedFontsCss() {
+  const fontsUrl =
+    "https://fonts.googleapis.com/css2?" +
+    "family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400" +
+    "&family=Fraunces:wght@500;600;700" +
+    "&display=swap";
+  const ua =
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 " +
+    "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
+
+  const res = await fetch(fontsUrl, { headers: { "User-Agent": ua } });
+  if (!res.ok) throw new Error(`Google Fonts fetch failed: ${res.status}`);
+  const css = await res.text();
+
+  // Each @font-face block is preceded by a /* subset-name */ comment. Keep only latin.
+  const blocks = css.split(/(?=\/\*\s*[a-z\-]+\s*\*\/)/i);
+  const latinOnly = blocks
+    .filter((b) => /\/\*\s*latin\s*\*\//i.test(b) || !/\/\*\s*[a-z\-]+\s*\*\//i.test(b))
+    .join("\n");
+
+  const urlRe = /url\((https:\/\/[^)]+\.woff2)\)/g;
+  const urls = [...new Set([...latinOnly.matchAll(urlRe)].map((m) => m[1]))];
+
+  const replacements = {};
+  for (const u of urls) {
+    const r = await fetch(u);
+    if (!r.ok) {
+      console.warn(`  font fetch failed (${r.status}): ${u}`);
+      continue;
+    }
+    const buf = Buffer.from(await r.arrayBuffer());
+    replacements[u] = `data:font/woff2;base64,${buf.toString("base64")}`;
+    console.log(`  font ${u.split("/").pop().padEnd(40)} -> ${(buf.length / 1024).toFixed(1)} KB`);
+  }
+
+  let out = latinOnly;
+  for (const [u, dataUri] of Object.entries(replacements)) {
+    out = out.split(u).join(dataUri);
+  }
+  return out;
+}
 
 async function encodeImage(filePath) {
   const ext = path.extname(filePath).toLowerCase();
@@ -241,12 +328,34 @@ async function main() {
   const resumeBuf = fs.readFileSync(SRC_RESUME);
   const resumeDataUri = `data:application/pdf;base64,${resumeBuf.toString("base64")}`;
 
+  console.log("Fetching + inlining Google Fonts (DM Sans, Fraunces)…");
+  let fontsCss = "";
+  try {
+    fontsCss = await fetchInlinedFontsCss();
+  } catch (err) {
+    console.warn(
+      `  Could not inline fonts (${err.message}). Falling back to system fonts in offline contexts.`
+    );
+  }
+
   console.log("Composing portfolio.html…");
   let out = html;
 
+  // Strip the Google Fonts <link> + <preconnect>s (we're inlining the fonts ourselves).
+  out = out
+    .replace(
+      /<link rel="preconnect" href="https:\/\/fonts\.googleapis\.com" ?\/?>\s*/,
+      ""
+    )
+    .replace(
+      /<link rel="preconnect" href="https:\/\/fonts\.gstatic\.com" crossorigin ?\/?>\s*/,
+      ""
+    )
+    .replace(/<link href="https:\/\/fonts\.googleapis\.com\/css2[^"]+" rel="stylesheet" ?\/?>\s*/, "");
+
   out = out.replace(
     /<link rel="stylesheet" href="styles\.css" ?\/?>/,
-    `<style>\n${css}\n${PRINT_AND_TOC_CSS}\n</style>`
+    `<style>\n/* ---------- Google Fonts (inlined as base64) ---------- */\n${fontsCss}\n\n/* ---------- Site styles ---------- */\n${css}\n${PRINT_AND_TOC_CSS}\n</style>`
   );
 
   out = out.replace(
